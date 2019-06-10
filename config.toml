@@ -1,4 +1,4 @@
-baseURL = "https://frank889.github.io/"
+baseURL = "https://frank889.github.io/personal-blog/"
 languageCode = "en-us"
 title = "My Little Coding Blog"
 theme = "edidor-master"
