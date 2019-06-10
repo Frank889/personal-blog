@@ -1,4 +1,4 @@
-baseURL = "anothercoding.blog"
+baseURL = "http://www.anothercoding.blog"
 languageCode = "en-us"
 title = "My Little Coding Blog"
 theme = "edidor-master"
