@@ -1,6 +1,6 @@
-baseURL = "http://example.org/"
+baseURL = "https://frank889.github.io/"
 languageCode = "en-us"
-title = "My New Hugo Site"
+title = "My Little Coding Blog"
 theme = "edidor-master"
 # filesystem path to write files to
 publishDir = "docs"
