@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en-us" >
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content="Hugo 0.55.6" />
+    
+    <link rel="canonical" href="http://example.org/post/nlp&#43;v_%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E9%9B%86%E6%A0%87%E6%B3%A8%E5%B7%A5%E5%85%B7_%E5%9B%BE%E5%83%8F%E8%AF%AD%E6%96%99%E6%95%B0%E6%8D%AE%E5%BA%93_%E5%AE%9E%E9%AA%8C%E5%AE%A4%E6%90%9C%E7%B4%A2/" />
+    <meta name="description" content="">
+    
+
+    <title>NLP&#43;V_深度学习数据集标注工具_图像语料数据库_实验室搜索 &middot; My New Hugo Site</title>
+
+    <link rel="shortcut icon" href="http://example.org/images/favicon.ico" />
+
+    <link rel="stylesheet" href="http://example.org/css/main.css" />
+    
+    
+    
+</head>
+
+
+<body class="loading -mode">
+    
+<div class="top">
+    <img class="logo" src="http://example.org/images/logo.svg" alt="logo" />
+</div>
+<div class="bottom">
+    <img class="logo" src="http://example.org/images/logo.svg" alt="logo" />
+</div>
+
+    <header class="header">
+    <ul class="menu clearfix control">
+        
+
+<li class="logo-container logo-default">
+    <a href="http://example.org/" class="btn logo-link">
+        <img class="logo" src="http://example.org/images/logo.svg" alt="logo" />
+    </a>
+</li>
+
+        
+        
+    </ul>
+</header>
+
+    <div class="middle">
+        <nav class="sidebar">
+            <ul class="posts control">
+    
+    <li><a class="no-break btn" href='/post/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%E7%9A%84%E5%8F%98%E5%9E%8B/'><i class="icon icon-post"></i>动态规划背包问题的变型</a></li>
+    
+    <li><a class="no-break btn" href='/post/nlp&#43;v_%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E9%9B%86%E6%A0%87%E6%B3%A8%E5%B7%A5%E5%85%B7_%E5%9B%BE%E5%83%8F%E8%AF%AD%E6%96%99%E6%95%B0%E6%8D%AE%E5%BA%93_%E5%AE%9E%E9%AA%8C%E5%AE%A4%E6%90%9C%E7%B4%A2/'><i class="icon icon-post"></i>NLP&#43;V_深度学习数据集标注工具_图像语料数据库_实验室搜索</a></li>
+    
+    <li><a class="no-break btn" href='/post/dynamic-programming-knapsack-problem/'><i class="icon icon-post"></i>Dynamic Programming Knapsack Problem</a></li>
+    
+</ul>
+
+        </nav>
+        <main class="main">
+            <article class="article">
+    <h2 class="title"><a href='/post/nlp&#43;v_%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E9%9B%86%E6%A0%87%E6%B3%A8%E5%B7%A5%E5%85%B7_%E5%9B%BE%E5%83%8F%E8%AF%AD%E6%96%99%E6%95%B0%E6%8D%AE%E5%BA%93_%E5%AE%9E%E9%AA%8C%E5%AE%A4%E6%90%9C%E7%B4%A2/' class="btn">NLP&#43;V_深度学习数据集标注工具_图像语料数据库_实验室搜索</a></h2>
+    <div class="article-meta clearfix">
+        <ul class="dates clearfix left control">
+            <li><i class="icon icon-date"></i></li>
+            <li class="publish-date">
+                <time datetime="2017.02.07">2017.02.07</time>
+            </li>
+        </ul>
+        
+        
+    </div>
+    <div class="content">
+        
+        
+
+<p>~~因为不太会使用opencv、matlab工具，所以在找一些比较简单的工具。</p>
+
+<h2 id="一-nlp标注工具">一、NLP标注工具</h2>
+
+<p>能不能构建一个中文文本的标注工具，可以达到以下两个特点：</p>
+
+<p>标注过程背后含有智能算法，将人工重复劳动降到最低；</p>
+
+<p>标注界面显而易见地友好，让标注操作尽可能简便和符合直觉。</p>
+
+<p>答案是可以的。事实上很多标注工具已经做到了这一点，最先进的如Explosion.ai的Prodigy；然而开发了著名的NLP开源包Spacy的explosion.ai选择了将Prodigy闭源，而Spacy支持中文也仍然遥遥无期。我们希望构建一个开源的中文文本标注工具，而本文很多的技术灵感正是来自Prodigy文档。
+流程：</p>
+
+<p>用户标一个label</p>
+
+<p>主动学习的后台算法分为online和offline部分。online部分即时更新模型，可使用诸如SVM、bag of words等尽可能快的传统方法；offline部分当标注数据积累到一定数量时更新模型，可使用准确度较高的深度学习模型。</p>
+
+<p>模型更新后，对尽可能多的example做预测，将确信度排序，取确信度最低的一个example作为待标注例子。重复1的过程。</p>
+
+<p>可以想象如果模型训练得好的话，这个过程将直接忽略掉确信度最大的那些例子，而把所有重点放在分类边界上的那些确信度小的例子。这样可以尽算法所能减少用户端的人工工作量。</p>
+
+<h3 id="1-brat">1 BRAT</h3>
+
+<p>BRAT是一个基于web的文本标注工具，主要用于对文本的结构化标注，用BRAT生成的标注结果能够把无结构化的原始文本结构化，供计算机处理。利用该工具可以方便的获得各项NLP任务需要的标注语料。
+<div align=center><img width = '150' height ='150' src ="data:image/jpeg;base64,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"/></div></p>
+
+<h3 id="2-prodigy">2 Prodigy</h3>
+
+<p>Prodigy给了一个非常好的demo，每一次的标注只需要用户解决一个case的问题。以文本分类为例，对于算法给出的分类结果，只需要点击“正确”提供正样本，“错误”提供负样本，“略过”将不相关的信息滤除，“Redo”让用户撤回操作，四个功能键以最简模式让用户进行标注操作。</p>
+
+<p>真正应用中，应该还要加入一个用户自己加入标注的交互方式，比如用户可以高亮一个词然后选择是“公司”，或者链接两个实体选择他们的关系等等。</p>
+
+<h3 id="3-iepy">3 IEPY</h3>
+
+<p>整个工程比较完整，有用户管理系统。前端略重，对用户不是非常友好</p>
+
+<h3 id="4-deepdive-mindtagger">4 DeepDive (Mindtagger)</h3>
+
+<p>介绍 <a href="http://deepdive.stanford.edu/labeling">http://deepdive.stanford.edu/labeling</a></p>
+
+<p>前端比较简单，用户界面友好。</p>
+
+<p>前端代码 <a href="https://github.com/HazyResearch/mindbender">https://github.com/HazyResearch/mindbender</a></p>
+
+<p>将DeepDive的corenlp部分转为支持中文的代码尝试：</p>
+
+<p><a href="https://github.com/SongRb/DeepDiveChineseApps">https://github.com/SongRb/DeepDiveChineseApps</a></p>
+
+<p><a href="https://github.com/qiangsiwei/DeepDive_Chinese">https://github.com/qiangsiwei/DeepDive_Chinese</a></p>
+
+<p><a href="https://github.com/mcavdar/deepdive/commit/6882178cbd38a5bbbf4eee8b76b1e215537425b2">https://github.com/mcavdar/deepdive/commit/6882178cbd38a5bbbf4eee8b76b1e215537425b2</a></p>
+
+<hr />
+
+<h2 id="二-vs标注工具-labelimg">二、VS标注工具——LabelImg</h2>
+
+<p>###1、PyQt
+用 PyQt 写的, 很轻量, Linux/macOS/Windows 全平台均可运行.
+工具github网址：<a href="https://github.com/tzutalin/labelImg">https://github.com/tzutalin/labelImg</a>
+知乎介绍网址：有图像标注工具推荐或者分享吗？
+<div align=center><img width = '150' height ='150' src ="https://img-blog.csdn.net/20170207115840184?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvc2luYXRfMjY5MTczODM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast"/></div>
+###2、Vatic
+参考：人工智能AI工具-视频标注工具vatic的搭建和使用
+视频标注工具vatic，Vatic源自MIT的一个研究项目(Video Annotation Tool from Irvine, California)。输入一段视频，支持自动抽取成粒度合适的标注任务并在流程上支持接入亚马逊的众包平台Mechanical Turk。</p>
+
+<p>网址：<a href="http://web.mit.edu/vondrick/vatic/">http://web.mit.edu/vondrick/vatic/</a></p>
+
+<p>Vatic源自MIT的一个研究项目(Video Annotation Tool from Irvine, California)。输入一段视频，支持自动抽取成粒度合适的标注任务并在流程上支持接入亚马逊的众包平台Mechanical Turk。除此之外，其还有很多实用的特性：
+1.简洁使用的GUI界面，支持多种快捷键操作
+2.基于opencv的tracking，这样就可以抽样的标注，减少工作量
+具体使用时，可以设定要标注的物体label，比如：水果，人，车，等等。然后指派任务给到众包平台（也可是自己的数据工程师）。现阶段支持的标注样式是框（box）。一个示例，下图标注了NBA直播比赛中的运动员</p>
+
+<h3 id="3-bbox-label-tool">3、BBox-Label-Tool&rdquo;</h3>
+
+<div align=center><img width = '150' height ='150' src ="https://img-blog.csdn.net/20170316163452483?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvc2luYXRfMjY5MTczODM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast"/></div>
+
+<h3 id="4-图像标注vs2013项目">4、图像标注VS2013项目</h3>
+
+<p>有人自己写了一个版本：
+打框的代码(c++)我封装成了dll，下载地址：图像标注VS2013项目 （我的环境是win7vs2013旗舰版，win8 win10好像不能运行）</p>
+
+<p>别人封装的opencv动态库，现在修改为opencv2.4.10，64位，vs2013，按网上教程配置好opencv，资源地址：
+图像标注EXE-2016-10-18
+上面的代码好像忘写操作说明了，这里写一下：
+（1）图片显示出来后，输入法切换到英文；
+（2）在目标的左上角按下鼠标左键，拉一个包围框到目标右下角，然后键盘输入标签(一个字符)
+（3）继续（2）操作，直到框完该张图片上的目标；
+（4）按n进入下一张，esc退出。
+注意：标签只能输入一个字符，你可以在生成的txt文件中替换成你实际的标签。</p>
+
+        
+    </div>
+
+</article>
+<section class="comment">
+    <p class="local-info">
+        Comment is disabled to avoid unwanted discussions from 'localhost:1313' on your Disqus
+        account...
+    </p>
+    <div id="disqus_thread"></div>
+</section>
+<script type="text/javascript">
+
+    (function () {
+        if (window.location.hostname == "localhost") {
+            return
+        }
+        document.querySelector('.local-info').classList.add('hide')
+
+        let dsq = document.createElement('script')
+        dsq.type = 'text/javascript'
+        dsq.async = true
+        let disqus_shortname = ''
+        dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq)
+    })()
+</script>
+
+
+        </main>
+    </div>
+    <footer class="footer clearfix">
+    <ul class="control social clearfix">
+        <li><a class="author btn" href="#"></a></li>
+        
+        <li>
+            <a class="icon-link btn" href="http://example.org/index.xml" type="application/rss+xml" title="rss">
+                <i class="rss icon"></i></a>
+        </li>
+    </ul>
+
+    <ul class="control status clearfix">
+        <li><a href="#" class="btn">Posts:
+                0</a>
+        </li>
+        <li><a href="#" class="btn">Pages:
+                0</a></li>
+        <li><a href="#" class="btn">en</a></li>
+        <li><a href="https://gohugo.io" class="btn">Hugo, 0.55.6</a></li>
+        <li><a href="https://github.com/jacobsun/edidor" class="btn">Theme: Edidor</a></li>
+        <li>
+            
+                <a href="#" class="btn">Last build: <time
+                    datetime="2019-05-18T07:57:00Z">2019-05-18T07:57:00Z</time>
+                </a>
+            
+        </li>
+    </ul>
+</footer>
+<div class="dialog">
+    <div class="wrapper">
+        <div class="clearfix"><button class="btn close-dialog">X</button></div>
+        <header>
+            <h1 class="title">Theme Name</h1>
+        </header>
+        <main>
+            <div class="clearfix">
+                <label for="theme-name">
+                    <p>Only English Character, space, hyphen are allowed!</p>
+                    <p>Valid name examples: "custom", "fantastic theme", "my-theme"</p>
+                    <p>Invalid name examles: "我的主题", ":)", "123"</p>
+                </label>
+                <input type="text" name="theme-name" id="theme-name">
+            </div>
+            <div class="clearfix">
+                <button class="btn export">Export</button>
+            </div>
+
+        </main>
+        <footer></footer>
+    </div>
+</div>
+
+    <script src="http://example.org/js/main.js"></script>
+
+
+</body>
+
+</html>
